@@ -241,6 +241,7 @@ section{position:relative;padding:100px 0}
 .prod:hover{transform:translateY(-8px);border-color:rgba(91,192,235,.45);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
 .prod-img{aspect-ratio:1.25;display:grid;place-items:center;position:relative;overflow:hidden;
   background:linear-gradient(150deg,rgba(27,108,168,.4),rgba(11,37,69,.55))}
+  .prod-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .prod-img svg.fishart{width:48%;color:rgba(186,221,247,.55);transition:transform .4s}
 .prod:hover .prod-img svg.fishart{transform:scale(1.08) rotate(-3deg)}
 .prod-img .tag{position:absolute;top:10px;left:10px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
@@ -633,10 +634,10 @@ document.getElementById("diffs").innerHTML = diffs.map(d=>`
    art: fish | shrimp | shell | filet
    ========================================================= */
 const products = [
-  {nome:"Corvina", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, carne firme.", preco:""},
-  {nome:"Arraia", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, sabor suave.", preco:""},
-  {nome:"Camarão", cat:"camaroes", art:"shrimp", desc:"Selecionado e higienizado.", preco:""},
-  {nome:"Sardinha", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, ideal para o dia a dia.", preco:""}
+  {nome:"Corvina", cat:"peixes", art:"fish", img:"img/corvina.jpg", desc:"Peixe fresco selecionado, carne firme.", preco:""},
+  {nome:"Arraia", cat:"peixes", art:"fish", img:"img/arraia.jpg", desc:"Peixe fresco selecionado, sabor suave.", preco:""},
+  {nome:"Camarão", cat:"camaroes", art:"shrimp", img:"img/camarao.jpg", desc:"Selecionado e higienizado.", preco:""},
+  {nome:"Sardinha", cat:"peixes", art:"fish", img:"img/sardinha.jpg", desc:"Peixe fresco selecionado, ideal para o dia a dia.", preco:""}
 ];
 const cats = [
   {id:"todos", label:"Todos"},
@@ -654,7 +655,7 @@ function renderProducts(cat){
     <div class="prod">
       <div class="prod-img">
         <span class="tag">${catLabel[p.cat]}</span>
-        ${I[p.art]}
+        ${p.img ? `<img class="prod-photo" src="${p.img}" alt="${p.nome}" loading="lazy">` : I[p.art]}
       </div>
       <div class="prod-body">
         <h3>${p.nome}</h3>
