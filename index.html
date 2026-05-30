@@ -633,26 +633,15 @@ document.getElementById("diffs").innerHTML = diffs.map(d=>`
    art: fish | shrimp | shell | filet
    ========================================================= */
 const products = [
-  {nome:"Tilápia", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, ideal para o dia a dia.", preco:""},
-  {nome:"Dourado", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, sabor marcante.", preco:""},
   {nome:"Corvina", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, carne firme.", preco:""},
-  {nome:"Pescada", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, leve e versátil.", preco:""},
-  {nome:"Camarão Médio", cat:"camaroes", art:"shrimp", desc:"Selecionado e higienizado.", preco:""},
-  {nome:"Camarão Graúdo", cat:"camaroes", art:"shrimp", desc:"Selecionado, ideal para receitas especiais.", preco:""},
-  {nome:"Lula", cat:"frutos", art:"shell", desc:"Fruto do mar fresco e limpo.", preco:""},
-  {nome:"Polvo", cat:"frutos", art:"shell", desc:"Fruto do mar selecionado.", preco:""},
-  {nome:"Filé de Tilápia", cat:"files", art:"filet", desc:"Filé limpo, sem espinhas, pronto para o preparo.", preco:""},
-  {nome:"Filé de Pescada", cat:"files", art:"filet", desc:"Filé selecionado, prático e saboroso.", preco:""},
-  {nome:"Posta de Cação", cat:"especiais", art:"fish", desc:"Corte especial, carne firme.", preco:""},
-  {nome:"Bacalhau Dessalgado", cat:"especiais", art:"filet", desc:"Seleção especial para ocasiões marcantes.", preco:""}
+  {nome:"Arraia", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, sabor suave.", preco:""},
+  {nome:"Camarão", cat:"camaroes", art:"shrimp", desc:"Selecionado e higienizado.", preco:""},
+  {nome:"Sardinha", cat:"peixes", art:"fish", desc:"Peixe fresco selecionado, ideal para o dia a dia.", preco:""}
 ];
 const cats = [
   {id:"todos", label:"Todos"},
   {id:"peixes", label:"Peixes"},
-  {id:"camaroes", label:"Camarões"},
-  {id:"frutos", label:"Frutos do Mar"},
-  {id:"files", label:"Filés"},
-  {id:"especiais", label:"Especiais"}
+  {id:"camaroes", label:"Camarões"}
 ];
 const catLabel = {peixes:"Peixe",camaroes:"Camarão",frutos:"Fruto do Mar",files:"Filé",especiais:"Especial"};
 
