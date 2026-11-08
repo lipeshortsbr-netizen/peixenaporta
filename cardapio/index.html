@@ -109,6 +109,35 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .swipe span{display:flex;align-items:center;gap:10px;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600}
 .swipe b{display:inline-block;animation:nudge 1.3s ease-in-out infinite;color:var(--glow);text-shadow:0 0 10px var(--glow)}
 @keyframes nudge{50%{transform:translateX(7px)}}
+.stagewrap{position:relative}
+.hint{position:absolute;z-index:6;left:50%;top:calc(50% - 40px);transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;border-radius:999px;padding:12px 18px;font-weight:700;font-size:14px;pointer-events:none;transition:opacity .5s;box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 0 30px rgba(63,180,255,.6),0 14px 40px rgba(0,20,60,.5)}
+.hint .hand{display:inline-block;font-size:20px;animation:swipehand 1.6s ease-in-out infinite}
+@keyframes swipehand{0%{transform:translateX(14px) rotate(10deg)}50%{transform:translateX(-14px) rotate(-10deg)}100%{transform:translateX(14px) rotate(10deg)}}
+.hint.gone,.nextb.gone{opacity:0;pointer-events:none}
+.nextb{position:absolute;z-index:6;right:max(6px,env(safe-area-inset-right,0px));top:calc(50% - 26px);width:44px;height:44px;border-radius:50%;font-size:28px;line-height:1;display:grid;place-items:center;transition:opacity .4s;animation:breathe 1.8s ease-in-out infinite}
+@keyframes breathe{50%{transform:translateX(5px)}}
+.stage.peek .card{animation:peek 1.5s ease-in-out 2}
+@keyframes peek{0%,100%{translate:0 0}40%,60%{translate:-70px 0}}
+.more{position:absolute;z-index:4;top:14px;right:14px;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:700;display:flex;gap:5px;align-items:center}
+.gal{position:fixed;inset:0;z-index:70;background:#000;display:none}
+.gal.on{display:block}
+.gtrack{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.gtrack::-webkit-scrollbar{display:none}
+.gs{flex:none;width:100%;height:100%;position:relative;scroll-snap-align:center;overflow:hidden;display:grid;place-items:center}
+.gs .bg{position:absolute;inset:-10%;width:120%;height:120%;object-fit:cover;filter:blur(30px) brightness(.55)}
+.gs video,.gs img.fg{position:relative;max-width:100%;width:100%;height:100%;object-fit:contain}
+.gbar{position:absolute;z-index:3;left:0;right:0;top:0;padding-top:calc(10px + env(safe-area-inset-top,0px));padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:14px;background:linear-gradient(rgba(0,0,0,.55),transparent)}
+.gprog{display:flex;gap:4px}
+.gprog i{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.3)}
+.gprog i.on{background:#fff;box-shadow:0 0 8px var(--glow)}
+.ghead{display:flex;align-items:center;gap:10px;margin-top:10px}
+.ghead b{flex:1;font-family:var(--display);font-weight:800;font-size:20px}
+.ghead small{font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.gx{width:40px;height:40px;border-radius:50%;font-size:17px}
+.gnav{position:absolute;z-index:3;top:50%;width:44px;height:44px;border-radius:50%;font-size:26px;display:grid;place-items:center;translate:0 -50%}
+.gnav.l{left:max(10px,env(safe-area-inset-left,0px))}.gnav.r{right:max(10px,env(safe-area-inset-right,0px))}
+.gnav[disabled]{opacity:0;pointer-events:none}
+.gadd{position:absolute;z-index:3;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;border-radius:999px;padding:13px 20px;font-weight:700;white-space:nowrap}
 .info{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 24px 150px;line-height:1.6}
 .info b{color:#fff;font-weight:600}
 
@@ -177,13 +206,20 @@ select.in option{color:#000}
     <span class="proto">Prévia · preços provisórios</span>
   </section>
 
-  <div class="stage" id="stage"></div>
+  <div class="stagewrap"><div class="stage" id="stage"></div>
+  <div class="hint glass" id="hint"><span class="hand">👆</span>Deslize para ver mais pratos</div>
+  <button class="nextb glass" id="nextb" aria-label="Próximo prato">›</button></div>
   <div class="dots" id="dots"></div>
-  <div class="swipe" id="swipe"><span class="glass">Deslize para ver os outros pratos <b>→</b></span></div>
 
   <p class="info"><b>Segunda a domingo, 8h às 18h</b><br>Retirada na casa da Viviane e do Ademir ou entrega com taxa combinada · Cruz das Almas e região</p>
 </div>
 
+<div class="gal" id="gal" aria-hidden="true">
+  <div class="gtrack" id="gtrack"></div>
+  <div class="gbar"><div class="gprog" id="gprog"></div><div class="ghead"><b id="gname"></b><small id="gcount"></small><button class="gx glass" id="gx" aria-label="Fechar">✕</button></div></div>
+  <button class="gnav l glass" id="gl" aria-label="Anterior">‹</button><button class="gnav r glass" id="gr" aria-label="Próximo">›</button>
+  <button class="gadd glass" id="gadd">Voltar e escolher a porção</button>
+</div>
 <div class="pill glass" id="pill"><span class="n" id="pn">0</span><span class="v"><small>Seu pedido</small><span id="pv">R$ 0,00</span></span><button id="openCo">Revisar</button></div>
 
 <div class="scrim" id="scrim"></div>
@@ -213,12 +249,14 @@ const D=[
  {id:'caruru',cat:'side',name:'Caruru',desc:'Quiabo no dendê com camarão inteiro, castanha e amendoim.',video:'/cardapio/media/caruru.mp4',poster:'/cardapio/media/caruru.jpg',p:[14.9,24.9,39.9]},
  {id:'feijao',cat:'side',name:'Feijão Fradinho',desc:'Fradinho no ponto, refogado no dendê com cebola e coentro.',video:'/cardapio/media/feijao.mp4',poster:'/cardapio/media/feijao.jpg',p:[12.9,21.9,34.9]}
 ];
+const G={moqueca:['v:moqueca','i:g_moqueca_1','i:g_moqueca_2','i:g_combo_1'],posta:['i:g_posta_1','i:g_posta_2'],mesa:['i:g_combo_1','v:moqueca','i:g_moqueca_2'],
+ vatapa:['v:vatapa','i:g_vatapa_1','i:g_vatapa_2'],caruru:['v:caruru'],feijao:['v:feijao','i:g_feijao_1','i:g_feijao_2']};
 const sel={},cart={};
 $('stage').innerHTML=D.map((d,n)=>{sel[d.id]=d.p.length>1?1:0;
  const m=d.video?`<video muted loop playsinline preload="${n<2?'auto':'none'}" poster="${d.poster}" data-src="${d.video}"></video>`:`<img class="ph" src="${d.img}" alt="">`;
  const sizes=d.p.length>1?`<div class="sizes">${d.p.map((v,i)=>`<button class="sz" data-i="${i}" aria-pressed="${i===1}"><b>${SZ[i]}</b><span>${brl(v)}</span></button>`).join('')}</div>`:`<div class="sizes one"><span class="sz" aria-pressed="true"><b>${d.one}</b><span>${brl(d.p[0])}</span></span></div>`;
  return `<article class="card" data-id="${d.id}" data-cat="${d.cat}">${m}<span class="edge"></span>
-  <span class="chip glass">${d.video?'<i></i>Filmado na cozinha':'Foto do prato'}</span>
+  <span class="chip glass">${d.video?'<i></i>Filmado na cozinha':'Foto do prato'}</span>${G[d.id].length>1?`<span class="more glass">⤢ ${G[d.id].length}</span>`:''}
   <div class="panel glass"><h2>${d.name}</h2><p>${d.desc}</p>${d.save?`<span class="save">${d.save}</span>`:''}${sizes}
   <button class="add" data-id="${d.id}"><span>Adicionar</span><span class="ap">${brl(d.p[sel[d.id]])}</span></button></div></article>`}).join('');
 $('dots').innerHTML=D.map(()=>'<i></i>').join('');
@@ -226,7 +264,7 @@ $('dots').innerHTML=D.map(()=>'<i></i>').join('');
 document.querySelectorAll('.card').forEach(c=>{const id=c.dataset.id,d=D.find(x=>x.id===id);
  c.querySelectorAll('button.sz').forEach(b=>b.onclick=()=>{sel[id]=+b.dataset.i;c.querySelectorAll('.sz').forEach(x=>x.setAttribute('aria-pressed',x===b));c.querySelector('.ap').textContent=brl(d.p[sel[id]])});
  c.querySelector('.add').onclick=e=>{const k=id+'|'+sel[id];cart[k]=(cart[k]||0)+1;const b=e.currentTarget;b.classList.add('done');b.firstElementChild.textContent='Adicionado ✓';setTimeout(()=>{b.classList.remove('done');b.firstElementChild.textContent='Adicionar'},1300);pill()};
- c.onclick=e=>{if(!c.classList.contains('on')&&!e.target.closest('button'))c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+ c.onclick=e=>{if(e.target.closest('button')||e.target.closest('.panel'))return;if(!c.classList.contains('on'))return c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});openGal(id)};
 });
 
 // active card = center of stage
@@ -237,12 +275,27 @@ function setActive(){const mid=st.scrollLeft+st.clientWidth/2;let best=0,bd=1e9;
  [...$('dots').children].forEach((d,i)=>d.classList.toggle('on',i===best));
  const cat=cards[best].dataset.cat;document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-pressed',t.dataset.cat===cat))}
 st.addEventListener('scroll',()=>requestAnimationFrame(setActive),{passive:true});setActive();
-// dica de deslizar: o próximo prato "espia" e o aviso some no primeiro gesto
-let touched=false;const gone=()=>{if(touched)return;touched=true;$('swipe').classList.add('gone')};
-['touchstart','pointerdown','wheel'].forEach(e=>st.addEventListener(e,gone,{passive:true}));
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',gone));
-const peek=()=>{if(touched||matchMedia('(prefers-reduced-motion: reduce)').matches)return;st.scrollBy({left:90,behavior:'smooth'});setTimeout(()=>{if(!touched)st.scrollBy({left:-90,behavior:'smooth'})},650)};
-setTimeout(peek,1400);setTimeout(peek,5200);
+// aviso de deslizar + proximo prato espiando
+let touched=false;const hide=()=>{if(touched)return;touched=true;$('hint').classList.add('gone')};
+['touchstart','pointerdown','wheel'].forEach(e=>st.addEventListener(e,hide,{passive:true}));
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',hide));
+const peek=()=>{if(touched||matchMedia('(prefers-reduced-motion: reduce)').matches)return;st.classList.remove('peek');void st.offsetWidth;st.classList.add('peek')};
+setTimeout(peek,900);const pk=setInterval(()=>touched?clearInterval(pk):peek(),5500);
+$('nextb').onclick=()=>{hide();const n=cards[Math.min(active+1,cards.length-1)];n.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+st.addEventListener('scroll',()=>$('nextb').classList.toggle('gone',active>=cards.length-1),{passive:true});
+let gi=0,gl=[];const gt=$('gtrack');
+function openGal(id){const d=D.find(x=>x.id===id);gl=G[id];gi=0;$('gname').textContent=d.name;
+ gt.innerHTML=gl.map(m=>{const[t,f]=m.split(':'),src='/cardapio/media/'+f+(t==='v'?'.mp4':'.jpg'),bg='/cardapio/media/'+f+'.jpg';
+  return `<div class="gs"><img class="bg" src="${bg}" alt="">${t==='v'?`<video muted loop playsinline preload="auto" src="${src}" poster="${bg}"></video>`:`<img class="fg" src="${src}" alt="${d.name}">`}</div>`}).join('');
+ $('gprog').innerHTML=gl.map(()=>'<i></i>').join('');$('gal').classList.add('on');$('gal').setAttribute('aria-hidden','false');
+ cards.forEach(c=>{const v=c.querySelector('video');if(v)v.pause()});gt.scrollLeft=0;gUpd()}
+function gUpd(){gi=Math.round(gt.scrollLeft/gt.clientWidth);[...$('gprog').children].forEach((x,i)=>x.classList.toggle('on',i<=gi));$('gcount').textContent=(gi+1)+' / '+gl.length;
+ $('gl').disabled=gi===0;$('gr').disabled=gi>=gl.length-1;gt.querySelectorAll('.gs').forEach((s,i)=>{const v=s.querySelector('video');if(v){i===gi?v.play().catch(()=>{}):v.pause()}})}
+gt.addEventListener('scroll',()=>requestAnimationFrame(gUpd),{passive:true});
+$('gl').onclick=()=>gt.scrollBy({left:-gt.clientWidth,behavior:'smooth'});$('gr').onclick=()=>gt.scrollBy({left:gt.clientWidth,behavior:'smooth'});
+function closeGal(){$('gal').classList.remove('on');$('gal').setAttribute('aria-hidden','true');gt.innerHTML='';const v=cards[active].querySelector('video');if(v)v.play().catch(()=>{})}
+$('gx').onclick=closeGal;$('gadd').onclick=closeGal;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeGal()});
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{const c=cards.find(c=>c.dataset.cat===t.dataset.cat);c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})});
 
 // order
