@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Análise de Preços · Peixe na Porta</title>
+<link rel="icon" href="/cardapio/media/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Yellowtail&display=swap">
+<style>
+/* Relatório interno: mesma linguagem do cardápio (oceano escuro + vidro), mas com foco em leitura e tabelas. */
+:root{--abyss:#020b1f;--deep:#06214f;--ocean:#1673e6;--glow:#3fb4ff;--ice:#bfe9ff;--white:#f5fbff;--mute:rgba(220,236,255,.7);
+ --low:#ff8a6b;--ok:#4ef0a5;--high:#ffc857;--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Figtree',system-ui,sans-serif;--script:'Yellowtail',cursive;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 60% at 20% 0%,#0c3a86 0%,transparent 55%),radial-gradient(90% 50% at 100% 30%,#0a4fc4 0%,transparent 50%),var(--abyss);background-attachment:fixed;color:var(--white);font-family:var(--body);font-size:15.5px;line-height:1.6}
+.wrap{max-width:880px;margin:0 auto;padding-block:28px 80px;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04) 60%,rgba(120,190,255,.07));backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border:1px solid rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 14px 40px rgba(0,20,60,.4);border-radius:22px}
+header{display:flex;align-items:center;gap:14px}
+header img{width:64px;filter:drop-shadow(0 0 14px rgba(63,180,255,.6))}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ice)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(30px,7vw,46px);line-height:1.02;letter-spacing:-.02em;margin:18px 0 10px;text-wrap:balance}
+h1 span{color:var(--glow);text-shadow:0 0 22px rgba(63,180,255,.6)}
+h2{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.01em;margin:46px 0 12px;text-wrap:balance}
+h3{font-family:var(--display);font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px;max-width:68ch}
+.lead{color:var(--mute);font-size:16.5px}
+.verdict{padding:22px;margin-top:22px;display:grid;gap:14px}
+.verdict .big{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.15}
+.verdict .big b{color:var(--low)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi{padding:16px}
+.kpi small{display:block;color:var(--mute);font-size:12.5px}
+.kpi b{font-family:var(--display);font-size:26px;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.t-low{background:rgba(255,138,107,.16);color:var(--low);border:1px solid rgba(255,138,107,.45)}
+.t-ok{background:rgba(78,240,165,.14);color:var(--ok);border:1px solid rgba(78,240,165,.4)}
+.t-high{background:rgba(255,200,87,.14);color:var(--high);border:1px solid rgba(255,200,87,.4)}
+.tbl{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;min-width:620px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}
+th{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ice);font-weight:700}
+td.n{white-space:nowrap}
+tr.us td{background:rgba(63,180,255,.1)}
+.card{padding:18px 18px 8px;margin-top:14px}
+.row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;margin-bottom:8px}
+.row .p{font-family:var(--display);font-weight:800;font-size:20px}
+.arrow{color:var(--glow);font-weight:800}
+ul{margin:6px 0 14px;padding-left:20px}li{margin-bottom:6px;max-width:68ch}
+.note{color:var(--mute);font-size:13.5px}
+.src a{color:var(--ice);word-break:break-all}
+.bar{height:10px;border-radius:9px;background:rgba(255,255,255,.08);position:relative;margin:8px 0 4px}
+.bar i{position:absolute;top:-3px;width:16px;height:16px;border-radius:50%;transform:translateX(-50%);border:2px solid var(--abyss)}
+.bar .r{position:absolute;top:0;bottom:0;border-radius:9px;background:linear-gradient(90deg,rgba(63,180,255,.35),rgba(63,180,255,.7))}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--mute)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+footer{margin-top:50px;color:var(--mute);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><img src="/cardapio/media/logo.webp" alt="Peixe na Porta"><div><div class="eyebrow">Documento interno · não indexado</div><div style="font-family:var(--script);font-size:26px">Peixe na Porta</div></div></header>
+
+<h1>Os preços do cardápio estão <span>baixos demais</span> nas porções para 2 e família</h1>
+<p class="lead">Comparação dos preços provisórios do cardápio com restaurantes de Cruz das Almas, Salvador e interior da Bahia. Pesquisa feita em 08/11/2026, nos cardápios do iFood e em reportagens locais.</p>
+
+<div class="verdict glass">
+  <div class="big">Individual está no preço certo. Para 2, família e a Mesa Baiana estão <b>20% a 45% abaixo</b> do mercado.</div>
+  <p style="margin:0">A Peixe na Porta vende pelo WhatsApp, sem a comissão de 12% a 27% do iFood, e compra o peixe direto. Isso permite ficar um pouco abaixo dos concorrentes. Mas hoje a diferença é grande demais: a Moqueca para 2 sai por R$ 69,90, enquanto o restaurante de Cruz das Almas cobra R$ 88,90 e os especialistas de Salvador cobram a partir de R$ 109,90.</p>
+</div>
+
+<div class="kpis" style="margin-top:14px">
+  <div class="kpi glass"><small>Moqueca para 2 (nosso)</small><b>R$ 69,90</b><br><span class="tag t-low">Baixo</span></div>
+  <div class="kpi glass"><small>Mesmo prato, Cruz das Almas</small><b>R$ 88,90</b><br><span class="note">Meu Cravo</span></div>
+  <div class="kpi glass"><small>Mesmo prato, Salvador</small><b>R$ 109–132</b><br><span class="note">Big Moqueca</span></div>
+  <div class="kpi glass"><small>Ganho estimado com o ajuste</small><b>+R$ 20</b><br><span class="note">por moqueca para 2</span></div>
+</div>
+
+<h2>Comparação por prato</h2>
+<p class="note">Legenda das etiquetas: <span class="tag t-low">Baixo</span> abaixo do mercado · <span class="tag t-ok">Bom</span> dentro da faixa · <span class="tag t-high">Alto</span> acima.</p>
+
+<div class="card glass">
+  <h3>Moqueca de Peixe</h3>
+  <div class="tbl"><table>
+    <tr><th>Onde</th><th>Porção</th><th>Preço</th><th>Inclui</th></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Individual</td><td class="n">R$ 39,90</td><td>Arroz e farofa <span class="tag t-ok">Bom</span></td></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Para 2</td><td class="n">R$ 69,90</td><td>Arroz e farofa <span class="tag t-low">Baixo</span></td></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Família (4)</td><td class="n">R$ 119,90</td><td>Arroz e farofa <span class="tag t-low">Baixo</span></td></tr>
+    <tr><td>Meu Cravo · Cruz das Almas</td><td>Prato (não diz porção)</td><td class="n">R$ 88,90</td><td>Moqueca de peixe; a de camarão é R$ 108,90</td></tr>
+    <tr><td>Meu Cravo · Cruz das Almas</td><td>Executivo individual</td><td class="n">R$ 37,90–42,90</td><td>Frango ou filé com arroz, feijão, tropeiro</td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Executivo individual</td><td class="n">R$ 64,90–69,90</td><td>Cação ou pescada, pirão, arroz, farofa</td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Marmita individual</td><td class="n">R$ 28,90–41,90</td><td>Marisco ou camarão; versão com vatapá e caruru</td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Para 2 (a partir de)</td><td class="n">R$ 109,90–136,90</td><td>Cação, pescada, dourado, vermelho; pirão, arroz, farofa</td></tr>
+    <tr><td>Ki-Mukeka · Salvador Shopping</td><td>Individual (250 g)</td><td class="n">R$ 119,99</td><td>Fradinho, pirão, arroz, farofa (casa premium)</td></tr>
+  </table></div>
+  <div class="row" style="margin-top:12px"><span>Sugestão:</span><span class="p">R$ 44,90</span><span class="arrow">·</span><span class="p">R$ 89,90</span><span class="arrow">·</span><span class="p">R$ 159,90</span></div>
+  <p class="note">Individual · Para 2 · Família. A versão para 2 fica igual à do restaurante de Cruz das Almas e bem abaixo de Salvador.</p>
+</div>
+
+<div class="card glass">
+  <h3>Peixe em Posta</h3>
+  <div class="tbl"><table>
+    <tr><th>Onde</th><th>Porção</th><th>Preço</th><th>Inclui</th></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Ind. · 2 · Família</td><td class="n">R$ 34,90 · 59,90 · 99,90</td><td>Arroz <span class="tag t-low">Baixo</span></td></tr>
+    <tr><td>Meu Cravo · Cruz das Almas</td><td>Prato</td><td class="n">R$ 81,90</td><td>Peixe frito</td></tr>
+    <tr><td>Meu Cravo · Cruz das Almas</td><td>Prato</td><td class="n">R$ 88,90</td><td>Filé de peixe grelhado</td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Prato</td><td class="n">R$ 109,90</td><td>Pescada amarela frita em posta, arroz, vinagrete, farofa</td></tr>
+  </table></div>
+  <div class="row" style="margin-top:12px"><span>Sugestão:</span><span class="p">R$ 39,90</span><span class="arrow">·</span><span class="p">R$ 79,90</span><span class="arrow">·</span><span class="p">R$ 139,90</span></div>
+</div>
+
+<div class="card glass">
+  <h3>Vatapá e Caruru</h3>
+  <div class="tbl"><table>
+    <tr><th>Onde</th><th>Porção</th><th>Preço</th><th>Observação</th></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Ind. · 2 · Família</td><td class="n">R$ 14,90 · 24,90 · 39,90</td><td>Sem peso informado <span class="tag t-ok">Bom</span></td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Porção</td><td class="n">a partir de R$ 18,90</td><td>Cada um</td></tr>
+    <tr><td>Ki-Mukeka · Salvador</td><td>400 g</td><td class="n">R$ 29,90</td><td>Cada um</td></tr>
+    <tr><td>Casinha de Mãe · Jequié</td><td>cerca de 1 kg</td><td class="n">R$ 24,00</td><td>Vem com peixe frito ou frango</td></tr>
+  </table></div>
+  <div class="row" style="margin-top:12px"><span>Sugestão:</span><span class="p">R$ 16,90</span><span class="arrow">·</span><span class="p">R$ 29,90</span><span class="arrow">·</span><span class="p">R$ 49,90</span></div>
+  <p class="note">O quiabo subiu até 95% na Bahia em 2026, e o camarão seco está em torno de R$ 52/kg em Feira de Santana. O caruru ficou mais caro de produzir.</p>
+</div>
+
+<div class="card glass">
+  <h3>Feijão Fradinho</h3>
+  <div class="tbl"><table>
+    <tr><th>Onde</th><th>Porção</th><th>Preço</th><th>Observação</th></tr>
+    <tr class="us"><td><b>Peixe na Porta (atual)</b></td><td>Ind. · 2 · Família</td><td class="n">R$ 12,90 · 21,90 · 34,90</td><td><span class="tag t-ok">Bom</span></td></tr>
+    <tr><td>Big Moqueca · Salvador</td><td>Porção</td><td class="n">a partir de R$ 15,90</td><td></td></tr>
+    <tr><td>Meu Cravo · Cruz das Almas</td><td>Guarnição</td><td class="n">R$ 11,90–13,90</td><td>Arroz, tropeiro, pirão</td></tr>
+  </table></div>
+  <div class="row" style="margin-top:12px"><span>Sugestão:</span><span class="p">R$ 13,90</span><span class="arrow">·</span><span class="p">R$ 24,90</span><span class="arrow">·</span><span class="p">R$ 42,90</span></div>
+</div>
+
+<div class="card glass">
+  <h3>Mesa Baiana (combo para 2)</h3>
+  <p>Hoje custa <b>R$ 99,90</b> e traz moqueca para 2, vatapá, caruru, feijão fradinho, arroz e farofa. Em Salvador, <b>só a moqueca para 2</b> já sai por R$ 109,90 a R$ 136,90. Em Cruz das Almas, a moqueca sozinha custa R$ 88,90. <span class="tag t-low">Muito baixo</span></p>
+  <div class="row"><span>Sugestão:</span><span class="p">R$ 139,90</span></div>
+  <p class="note">Com os preços sugeridos, os itens separados somariam R$ 174,60 (moqueca para 2 + vatapá, caruru e fradinho para 2). O combo continua dando R$ 34,70 de desconto, que é o argumento de venda.</p>
+</div>
+
+<h2>Tabela final sugerida</h2>
+<div class="tbl glass" style="padding:6px 8px">
+<table>
+  <tr><th>Prato</th><th>Individual</th><th>Para 2</th><th>Família (4)</th></tr>
+  <tr><td>Moqueca de Peixe</td><td class="n">R$ 44,90 <span class="note">(39,90)</span></td><td class="n">R$ 89,90 <span class="note">(69,90)</span></td><td class="n">R$ 159,90 <span class="note">(119,90)</span></td></tr>
+  <tr><td>Peixe em Posta</td><td class="n">R$ 39,90 <span class="note">(34,90)</span></td><td class="n">R$ 79,90 <span class="note">(59,90)</span></td><td class="n">R$ 139,90 <span class="note">(99,90)</span></td></tr>
+  <tr><td>Vatapá</td><td class="n">R$ 16,90 <span class="note">(14,90)</span></td><td class="n">R$ 29,90 <span class="note">(24,90)</span></td><td class="n">R$ 49,90 <span class="note">(39,90)</span></td></tr>
+  <tr><td>Caruru</td><td class="n">R$ 16,90 <span class="note">(14,90)</span></td><td class="n">R$ 29,90 <span class="note">(24,90)</span></td><td class="n">R$ 49,90 <span class="note">(39,90)</span></td></tr>
+  <tr><td>Feijão Fradinho</td><td class="n">R$ 13,90 <span class="note">(12,90)</span></td><td class="n">R$ 24,90 <span class="note">(21,90)</span></td><td class="n">R$ 42,90 <span class="note">(34,90)</span></td></tr>
+  <tr><td>Mesa Baiana</td><td class="n">–</td><td class="n">R$ 139,90 <span class="note">(99,90)</span></td><td class="n">–</td></tr>
+</table>
+</div>
+<p class="note" style="margin-top:8px">Entre parênteses, o preço provisório que está no cardápio hoje.</p>
+
+<h2>O que mais faz diferença</h2>
+<ul>
+  <li><b>Informar o peso de cada porção.</b> Os concorrentes dizem "400 g" ou "serve 2". Sugestão: individual com 350 g de moqueca, para 2 com 700 g e família com 1,4 kg. Acompanhamentos com 250 g, 500 g e 1 kg. Isso justifica o preço e evita reclamação.</li>
+  <li><b>Calcular o custo antes de fechar.</b> A regra comum em restaurante é o custo dos ingredientes ficar entre 30% e 35% do preço. Vale pesar uma moqueca para 2 e somar peixe, leite de coco, dendê, arroz, farofa e a embalagem de barro ou descartável.</li>
+  <li><b>A embalagem conta.</b> Se a panela de barro for junto, ela precisa estar no preço ou ter caução.</li>
+  <li><b>Lançar com cupom, não com preço baixo.</b> É melhor publicar os preços sugeridos e dar 10% na primeira compra ou frete grátis na semana de estreia. Baixar o preço depois é fácil; subir depois que o cliente se acostumou é difícil.</li>
+</ul>
+
+<h2>Limites desta pesquisa</h2>
+<ul>
+  <li>Em Cruz das Almas, só um restaurante tem cardápio completo com preços públicos (Meu Cravo, no iFood). Ele não é especializado em comida baiana.</li>
+  <li>Em Santo Antônio de Jesus e nas outras cidades do Recôncavo (Cachoeira, São Félix, Santo Amaro), não encontrei preços públicos de moqueca, vatapá ou caruru. Os restaurantes de lá aparecem em guias e avaliações, mas sem valores.</li>
+  <li>Os restaurantes de Salvador têm custo maior (aluguel, comissão do iFood). Por isso a sugestão fica entre Cruz das Almas e Salvador, mais perto de Cruz das Almas.</li>
+  <li>Para confirmar, o ideal é perguntar o preço da moqueca para 2 em 2 ou 3 restaurantes de Cruz das Almas e de Santo Antônio de Jesus pelo WhatsApp.</li>
+</ul>
+
+<h2>Fontes</h2>
+<ul class="src note">
+  <li>Restaurante Meu Cravo, Cruz das Almas (iFood, lido em 08/11/2026): <a href="https://www.ifood.com.br/delivery/cruz-das-almas-ba/restaurante-meu-cravo-centro/37d6986d-9173-47dc-8383-90ccaee7948f">ifood.com.br/…/restaurante-meu-cravo-centro</a>. O preço da moqueca de peixe (R$ 88,90) aparecia na busca, mas não no cardápio do dia.</li>
+  <li>Big Moqueca Bar e Restaurante, Salvador (iFood, 08/11/2026): <a href="https://www.ifood.com.br/delivery/salvador-ba/big-moqueca-bar-e-restaurante-monte-serrat/a8801b67-94c3-4517-aa35-aab38086f2ac">ifood.com.br/…/big-moqueca-bar-e-restaurante</a></li>
+  <li>Ki-Mukeka Express Salvador Shopping (iFood, 08/11/2026): <a href="https://www.ifood.com.br/delivery/salvador-ba/ki-mukeka-express-salvador-shopping-caminho-das-arvores/4f160158-5827-4db1-aa44-ce12b342a5ba">ifood.com.br/…/ki-mukeka-express</a></li>
+  <li>Casinha de Mãe, Jequié: <a href="https://casinhademae.com/comida-baiana/so-caruru-eou-vatapa">casinhademae.com</a></li>
+  <li>Preço do quiabo na Bahia em 2026, Correio: <a href="https://www.correio24horas.com.br/bahia/caruru-mais-salgado-preco-do-quiabo-sobe-95-na-bahia-e-encarece-tradicao-0922">correio24horas.com.br</a></li>
+  <li>Insumos do caruru em Feira de Santana, 2026, Acorda Cidade: <a href="https://www.acordacidade.com.br/feira-de-santana/caruru-de-cosme-e-damiao-esta-mais-salgado-em-2026-veja-precos-no-centro-de-abastecimento-de-feira-de-santana/">acordacidade.com.br</a></li>
+</ul>
+
+<footer>Página interna para a equipe Peixe na Porta. Não aparece no Google e não tem link no site.</footer>
+</div>
+</body>
+</html>
