@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020b1f">
+<meta name="description" content="Cardápio de refeições baianas da Peixe na Porta: moqueca, vatapá, caruru e mais. Monte seu pedido e reserve pelo WhatsApp.">
+<meta property="og:title" content="Cardápio Peixe na Porta">
+<meta property="og:description" content="Moqueca, vatapá, caruru e feijão fradinho feitos no dia. Reserve pelo WhatsApp.">
+<meta property="og:image" content="https://www.peixenaporta.com.br/cardapio/media/moqueca.jpg">
+<link rel="icon" href="/cardapio/media/logo.webp">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Cardápio Peixe na Porta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Yellowtail&display=swap">
+</head>
+<body>
+<style>
+/* Layout: phone-first stage. Deep ocean ground lit by moving blue caustics; vertical 9:16 dish films on a snap stage (center card glows); liquid-glass header, panels and order pill. Single deep-blue look. */
+:root{
+  --abyss:#020b1f; --deep:#06214f; --ocean:#1673e6; --glow:#3fb4ff; --ice:#bfe9ff; --white:#f5fbff; --mute:rgba(220,236,255,.68); --dende:#ffb340;
+  --display:'Bricolage Grotesque',system-ui,sans-serif; --body:'Figtree',system-ui,-apple-system,sans-serif; --script:'Yellowtail',cursive;
+  --glass:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.05) 55%,rgba(120,190,255,.10));
+  --glass-b:rgba(255,255,255,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--abyss);color:var(--white);font-family:var(--body);font-size:15px;overflow-x:hidden}
+button,a{font:inherit;color:inherit;border:0;background:none;cursor:pointer;text-decoration:none}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+
+/* ocean light */
+#sea{position:fixed;inset:0;width:100%;height:100%;z-index:0;filter:blur(38px) saturate(140%);opacity:.95}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.08;background-image:radial-gradient(rgba(255,255,255,.7) .5px,transparent .6px);background-size:3px 3px}
+.rays{position:fixed;inset:-20% -10% auto;height:70%;z-index:1;pointer-events:none;background:repeating-linear-gradient(100deg,rgba(150,210,255,0) 0 40px,rgba(150,210,255,.07) 40px 70px,rgba(150,210,255,0) 70px 120px);mask:linear-gradient(#000,transparent);-webkit-mask:linear-gradient(#000,transparent);animation:rays 12s ease-in-out infinite alternate}
+@keyframes rays{to{transform:translateX(60px) skewX(-6deg)}}
+.page{position:relative;z-index:2;max-width:520px;margin:0 auto;min-height:100%}
+
+/* liquid glass */
+.glass{position:relative;background:var(--glass);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);border:1px solid var(--glass-b);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.08),inset 0 0 22px rgba(120,190,255,.12),0 14px 40px rgba(0,20,60,.45)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 60% at 20% 0%,rgba(255,255,255,.35),transparent 45%);mix-blend-mode:screen}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--abyss)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;padding-block:10px 6px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+.hdr{display:flex;align-items:center;gap:10px;border-radius:24px;padding:8px 12px 8px 8px}
+.hdr img{width:46px;filter:drop-shadow(0 0 12px rgba(63,180,255,.55))}
+.hdr .t{flex:1;min-width:0;line-height:1.05}
+.hdr .t b{font-family:var(--script);font-weight:400;font-size:27px;display:block;color:#fff;text-shadow:0 0 18px rgba(63,180,255,.8)}
+.hdr .t small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.live{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;border-radius:999px;padding:6px 10px;white-space:nowrap}
+.live i{width:7px;height:7px;border-radius:50%;background:#4ef0a5;box-shadow:0 0 10px #4ef0a5}.live i.off{background:#ff7a6b;box-shadow:0 0 10px #ff7a6b}
+.tabs{display:flex;gap:6px;margin-top:10px;padding:5px;border-radius:999px}
+.tab{flex:1;border-radius:999px;padding:9px 6px;font-size:13px;font-weight:600;color:var(--mute);transition:.35s}
+.tab[aria-pressed="true"]{color:#fff;background:linear-gradient(180deg,rgba(63,180,255,.55),rgba(22,115,230,.55));box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 22px rgba(63,180,255,.55)}
+
+/* intro line */
+.lead{text-align:center;padding:14px 24px 0}
+.lead h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,8.4vw,38px);line-height:1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.lead h1 span{background:linear-gradient(90deg,#fff,var(--ice) 40%,var(--glow));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 16px rgba(63,180,255,.5))}
+.lead p{margin:8px auto 0;color:var(--mute);font-size:13.5px;max-width:34ch}
+.proto{display:inline-block;margin-top:10px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--dende);border:1px solid rgba(255,179,64,.45);border-radius:999px;padding:4px 10px}
+
+/* stage */
+.stage{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:22px calc(50% - min(36vw,160px)) 30px;overscroll-behavior-x:contain}
+.stage::-webkit-scrollbar{display:none}
+.card{flex:none;width:min(72vw,320px);aspect-ratio:9/16;max-height:calc(100dvh - 250px);min-height:420px;border-radius:30px;position:relative;overflow:hidden;scroll-snap-align:center;background:#03122e;
+  transform:scale(.9);opacity:.72;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s,box-shadow .5s;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.card.on{transform:none;opacity:1;box-shadow:0 0 0 1px rgba(160,220,255,.55),0 0 50px rgba(63,180,255,.55),0 0 120px rgba(22,115,230,.45),0 30px 60px rgba(0,0,0,.55)}
+.card video,.card img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card img.ph{animation:kb 16s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.14)}}
+.card::after{content:"";position:absolute;inset:auto 0 0;height:38%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(2,11,31,.45))}
+.edge{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:3;padding:1.5px;background:conic-gradient(from var(--a,0deg),transparent 0 70%,rgba(160,225,255,.95) 80%,transparent 90%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .5s}
+.card.on .edge{opacity:1;animation:spin 5s linear infinite}
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes spin{to{--a:360deg}}
+.chip{position:absolute;z-index:4;top:14px;left:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:999px;padding:6px 10px;display:flex;gap:6px;align-items:center}
+.chip i{width:6px;height:6px;border-radius:50%;background:#ff4d5e;box-shadow:0 0 8px #ff4d5e;animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.3}}
+.panel{position:absolute;z-index:4;left:10px;right:10px;bottom:10px;border-radius:24px;padding:14px 14px 12px}
+.panel h2{font-family:var(--display);font-weight:800;font-size:25px;line-height:1;letter-spacing:-.02em;margin:0}
+.panel p{margin:5px 0 12px;font-size:12.5px;line-height:1.35;color:rgba(235,245,255,.82)}
+.sizes{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:4px;border-radius:16px;background:rgba(2,11,31,.35);box-shadow:inset 0 1px 2px rgba(0,0,0,.4)}
+.sizes.one{grid-template-columns:1fr}
+.sz{border-radius:12px;padding:7px 2px;text-align:center;transition:.3s}
+.sz b{display:block;font-size:11.5px;font-weight:600;color:var(--mute)}
+.sz span{font-family:var(--display);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.sz[aria-pressed="true"]{background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.12));box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 4px 14px rgba(0,30,80,.4)}
+.sz[aria-pressed="true"] b{color:#fff}
+.add{margin-top:10px;width:100%;display:flex;justify-content:space-between;align-items:center;border-radius:16px;padding:13px 16px;font-weight:700;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#4cc0ff,#1673e6);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 26px rgba(63,180,255,.65),0 8px 18px rgba(0,30,90,.5)}
+.add::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:sheen 3.2s 1s infinite}
+@keyframes sheen{40%,100%{left:130%}}
+.add span:last-child{font-family:var(--display);font-variant-numeric:tabular-nums}
+.add:active{transform:scale(.98)}
+.add.done{background:linear-gradient(180deg,#4ef0a5,#16a36a);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 26px rgba(78,240,165,.6)}
+.save{display:block;font-size:11.5px;color:var(--dende);margin:-6px 0 10px;font-weight:600}
+
+.dots{display:flex;justify-content:center;gap:6px;margin-top:-8px}
+.dots i{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.3);transition:.4s}
+.dots i.on{width:22px;background:var(--glow);box-shadow:0 0 10px var(--glow)}
+.swipe{display:flex;justify-content:center;margin-top:14px;transition:opacity .5s}
+.swipe.gone{opacity:0;pointer-events:none}
+.swipe span{display:flex;align-items:center;gap:10px;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600}
+.swipe b{display:inline-block;animation:nudge 1.3s ease-in-out infinite;color:var(--glow);text-shadow:0 0 10px var(--glow)}
+@keyframes nudge{50%{transform:translateX(7px)}}
+.info{text-align:center;color:var(--mute);font-size:12.5px;padding:26px 24px 150px;line-height:1.6}
+.info b{color:#fff;font-weight:600}
+
+/* order pill */
+.pill{position:fixed;z-index:35;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,160%);width:calc(100% - 28px);max-width:460px;border-radius:26px;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;transition:transform .55s cubic-bezier(.2,.9,.2,1)}
+.pill.on{transform:translate(-50%,0)}
+.pill .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:rgba(63,180,255,.3);box-shadow:0 0 16px rgba(63,180,255,.6),inset 0 1px 0 rgba(255,255,255,.5)}
+.pill .v{flex:1;font-family:var(--display);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.pill .v small{display:block;font-family:var(--body);font-size:11px;font-weight:500;color:var(--mute)}
+.pill button{border-radius:20px;padding:13px 18px;font-weight:700;background:#fff;color:var(--deep);box-shadow:0 0 22px rgba(255,255,255,.35)}
+.pill.bump{animation:bump .5s}
+@keyframes bump{40%{transform:translate(-50%,0) scale(1.04)}}
+
+/* checkout sheet */
+.scrim{position:fixed;inset:0;z-index:45;background:rgba(2,11,31,.55);opacity:0;pointer-events:none;transition:.4s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:50;left:50%;bottom:0;width:100%;max-width:520px;max-height:92dvh;overflow-y:auto;transform:translate(-50%,105%);border-radius:30px 30px 0 0;transition:transform .55s cubic-bezier(.2,.9,.2,1);
+  padding-block:10px calc(110px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));background:linear-gradient(180deg,rgba(18,58,120,.72),rgba(4,20,50,.88))}
+.sheet.on{transform:translate(-50%,0)}
+.grab{width:42px;height:5px;border-radius:9px;background:rgba(255,255,255,.35);margin:0 auto 14px}
+.sheet h3{font-family:var(--display);font-weight:800;font-size:26px;margin:0 0 14px;letter-spacing:-.02em}
+.li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+.li img{width:46px;height:46px;border-radius:14px;object-fit:cover}
+.li div{flex:1;min-width:0}.li b{display:block;font-weight:600}.li small{color:var(--mute)}
+.st{display:flex;align-items:center;gap:8px}
+.st button{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
+.lbl{display:block;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ice);margin:20px 0 8px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:18px;background:rgba(2,11,31,.4)}
+.seg button{border-radius:14px;padding:11px;text-align:left}
+.seg b{display:block}.seg small{font-size:11.5px;color:var(--mute)}
+.seg button[aria-pressed="true"]{background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.in{width:100%;font:inherit;font-size:16px;color:#fff;background:rgba(2,11,31,.4);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:12px 14px}
+.in::placeholder{color:rgba(220,236,255,.45)}
+select.in option{color:#000}
+.where{margin:10px 0 0;font-size:12.5px;color:var(--mute)}
+.sum{margin-top:18px;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.sum div{display:flex;justify-content:space-between;color:var(--mute)}
+.sum .t{color:#fff;font-family:var(--display);font-weight:800;font-size:24px;margin-top:6px}
+.wa{position:fixed;z-index:55;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translate(-50%,200%);width:calc(100% - 28px);max-width:470px;transition:transform .55s cubic-bezier(.2,.9,.2,1)}
+.wa.on{transform:translate(-50%,0)}
+.wa a{display:flex;justify-content:space-between;align-items:center;border-radius:20px;padding:17px 20px;font-weight:700;background:linear-gradient(180deg,#4ef0a5,#12a465);color:#022a17;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 30px rgba(78,240,165,.55)}
+.wa a span:last-child{font-family:var(--display);font-size:19px}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="sea" aria-hidden="true"></canvas><div class="rays"></div><div class="grain"></div>
+
+<div class="page">
+  <header class="top">
+    <div class="hdr glass">
+      <img src="/cardapio/media/logo.webp" alt="Peixe na Porta">
+      <div class="t"><b>Peixe na Porta</b><small>Cozinha baiana · feita hoje</small></div>
+      <span class="live glass"><i id="dot"></i><span id="openTxt">Aberto</span></span>
+    </div>
+    <nav class="tabs glass" aria-label="Categorias">
+      <button class="tab" data-cat="main" aria-pressed="true">Pratos</button>
+      <button class="tab" data-cat="mesa" aria-pressed="false">Mesa completa</button>
+      <button class="tab" data-cat="side" aria-pressed="false">Acompanhar</button>
+    </nav>
+  </header>
+
+  <section class="lead">
+    <h1><span>Do mar direto</span> pra sua mesa</h1>
+    <p>Deslize, escolha a porção e monte o seu pedido.</p>
+    <span class="proto">Prévia · preços provisórios</span>
+  </section>
+
+  <div class="stage" id="stage"></div>
+  <div class="dots" id="dots"></div>
+  <div class="swipe" id="swipe"><span class="glass">Deslize para ver os outros pratos <b>→</b></span></div>
+
+  <p class="info"><b>Segunda a domingo, 8h às 18h</b><br>Retirada na casa da Viviane e do Ademir ou entrega com taxa combinada · Cruz das Almas e região</p>
+</div>
+
+<div class="pill glass" id="pill"><span class="n" id="pn">0</span><span class="v"><small>Seu pedido</small><span id="pv">R$ 0,00</span></span><button id="openCo">Revisar</button></div>
+
+<div class="scrim" id="scrim"></div>
+<section class="sheet glass" id="sheet" aria-hidden="true">
+  <div class="grab"></div>
+  <h3>Seu pedido</h3>
+  <div id="lines"></div>
+  <span class="lbl">Como receber</span>
+  <div class="seg" id="mode"><button aria-pressed="true" data-m="retirada"><b>Retirar</b><small>Casa da Viviane e do Ademir</small></button><button aria-pressed="false" data-m="entrega"><b>Entrega</b><small>Taxa combinada</small></button></div>
+  <p class="where" id="where">Endereço da retirada: a definir. Segue na confirmação pelo WhatsApp.</p>
+  <label><span class="lbl">Quando</span><select class="in" id="when"></select></label>
+  <label><span class="lbl">Nome</span><input class="in" id="nome" autocomplete="given-name" placeholder="Seu nome"></label>
+  <label id="endWrap" hidden><span class="lbl">Endereço de entrega</span><input class="in" id="end" autocomplete="street-address" placeholder="Rua, número e bairro"></label>
+  <label><span class="lbl">Observação</span><textarea class="in" id="obs" rows="2" placeholder="Ex.: sem pimenta"></textarea></label>
+  <div class="sum" id="sum"></div>
+</section>
+<div class="wa" id="waBar"><a id="wa" href="#" target="_blank" rel="noopener"><span>Reservar no WhatsApp</span><span id="waT"></span></a></div>
+
+<script>
+const WA='5575983210868',$=i=>document.getElementById(i),brl=v=>'R$ '+v.toFixed(2).replace('.',',');
+const SZ=['Individual','Para 2','Família'];
+const D=[
+ {id:'moqueca',cat:'main',name:'Moqueca de Peixe',desc:'Peixe fresco no leite de coco e dendê, tomate, pimentão e coentro. Com arroz e farofa.',video:'/cardapio/media/moqueca.mp4',poster:'/cardapio/media/moqueca.jpg',p:[39.9,69.9,119.9]},
+ {id:'posta',cat:'main',name:'Peixe em Posta',desc:'Posta temperada no limão, ao molho de tomate, pimentão e coentro. Com arroz.',img:'/cardapio/media/posta.jpg',p:[34.9,59.9,99.9]},
+ {id:'mesa',cat:'mesa',name:'Mesa Baiana',desc:'Moqueca para 2, vatapá, caruru, feijão fradinho, arroz e farofa.',img:'/cardapio/media/combo.jpg',p:[99.9],one:'Serve 2 com folga',save:'R$ 12,70 a menos que separado'},
+ {id:'vatapa',cat:'side',name:'Vatapá',desc:'Creme de pão com camarão seco, castanha e amendoim no leite de coco.',video:'/cardapio/media/vatapa.mp4',poster:'/cardapio/media/vatapa.jpg',p:[14.9,24.9,39.9]},
+ {id:'caruru',cat:'side',name:'Caruru',desc:'Quiabo no dendê com camarão inteiro, castanha e amendoim.',video:'/cardapio/media/caruru.mp4',poster:'/cardapio/media/caruru.jpg',p:[14.9,24.9,39.9]},
+ {id:'feijao',cat:'side',name:'Feijão Fradinho',desc:'Fradinho no ponto, refogado no dendê com cebola e coentro.',video:'/cardapio/media/feijao.mp4',poster:'/cardapio/media/feijao.jpg',p:[12.9,21.9,34.9]}
+];
+const sel={},cart={};
+$('stage').innerHTML=D.map((d,n)=>{sel[d.id]=d.p.length>1?1:0;
+ const m=d.video?`<video muted loop playsinline preload="${n<2?'auto':'none'}" poster="${d.poster}" data-src="${d.video}"></video>`:`<img class="ph" src="${d.img}" alt="">`;
+ const sizes=d.p.length>1?`<div class="sizes">${d.p.map((v,i)=>`<button class="sz" data-i="${i}" aria-pressed="${i===1}"><b>${SZ[i]}</b><span>${brl(v)}</span></button>`).join('')}</div>`:`<div class="sizes one"><span class="sz" aria-pressed="true"><b>${d.one}</b><span>${brl(d.p[0])}</span></span></div>`;
+ return `<article class="card" data-id="${d.id}" data-cat="${d.cat}">${m}<span class="edge"></span>
+  <span class="chip glass">${d.video?'<i></i>Filmado na cozinha':'Foto do prato'}</span>
+  <div class="panel glass"><h2>${d.name}</h2><p>${d.desc}</p>${d.save?`<span class="save">${d.save}</span>`:''}${sizes}
+  <button class="add" data-id="${d.id}"><span>Adicionar</span><span class="ap">${brl(d.p[sel[d.id]])}</span></button></div></article>`}).join('');
+$('dots').innerHTML=D.map(()=>'<i></i>').join('');
+
+document.querySelectorAll('.card').forEach(c=>{const id=c.dataset.id,d=D.find(x=>x.id===id);
+ c.querySelectorAll('button.sz').forEach(b=>b.onclick=()=>{sel[id]=+b.dataset.i;c.querySelectorAll('.sz').forEach(x=>x.setAttribute('aria-pressed',x===b));c.querySelector('.ap').textContent=brl(d.p[sel[id]])});
+ c.querySelector('.add').onclick=e=>{const k=id+'|'+sel[id];cart[k]=(cart[k]||0)+1;const b=e.currentTarget;b.classList.add('done');b.firstElementChild.textContent='Adicionado ✓';setTimeout(()=>{b.classList.remove('done');b.firstElementChild.textContent='Adicionar'},1300);pill()};
+ c.onclick=e=>{if(!c.classList.contains('on')&&!e.target.closest('button'))c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})};
+});
+
+// active card = center of stage
+const st=$('stage'),cards=[...document.querySelectorAll('.card')];let active=-1;
+function setActive(){const mid=st.scrollLeft+st.clientWidth/2;let best=0,bd=1e9;cards.forEach((c,i)=>{const d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid);if(d<bd){bd=d;best=i}});
+ if(best===active)return;active=best;cards.forEach((c,i)=>{c.classList.toggle('on',i===best);const v=c.querySelector('video');if(!v)return;if(i===best){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else v.pause();
+  if(Math.abs(i-best)===1&&v&&!v.src){v.src=v.dataset.src;v.preload='auto'}});
+ [...$('dots').children].forEach((d,i)=>d.classList.toggle('on',i===best));
+ const cat=cards[best].dataset.cat;document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-pressed',t.dataset.cat===cat))}
+st.addEventListener('scroll',()=>requestAnimationFrame(setActive),{passive:true});setActive();
+// dica de deslizar: o próximo prato "espia" e o aviso some no primeiro gesto
+let touched=false;const gone=()=>{if(touched)return;touched=true;$('swipe').classList.add('gone')};
+['touchstart','pointerdown','wheel'].forEach(e=>st.addEventListener(e,gone,{passive:true}));
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',gone));
+const peek=()=>{if(touched||matchMedia('(prefers-reduced-motion: reduce)').matches)return;st.scrollBy({left:90,behavior:'smooth'});setTimeout(()=>{if(!touched)st.scrollBy({left:-90,behavior:'smooth'})},650)};
+setTimeout(peek,1400);setTimeout(peek,5200);
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{const c=cards.find(c=>c.dataset.cat===t.dataset.cat);c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})});
+
+// order
+const item=k=>{const[id,i]=k.split('|');const d=D.find(x=>x.id===id);return{d,i:+i,price:d.p[+i],label:d.name+(d.p.length>1?' · '+SZ[+i]:'')}};
+const total=()=>Object.entries(cart).reduce((a,[k,q])=>a+item(k).price*q,0),count=()=>Object.values(cart).reduce((a,q)=>a+q,0);
+function pill(){const n=count();$('pill').classList.toggle('on',n>0);$('pn').textContent=n;$('pv').textContent=brl(total());$('pill').classList.remove('bump');void $('pill').offsetWidth;$('pill').classList.add('bump')}
+let mode='retirada';
+function render(){$('lines').innerHTML=Object.keys(cart).map(k=>{const it=item(k);return `<div class="li"><img src="${it.d.poster||it.d.img}" alt=""><div><b>${it.label}</b><small>${brl(it.price)}</small></div><div class="st"><button data-k="${k}" data-d="-1" aria-label="Menos">−</button><span>${cart[k]}</span><button data-k="${k}" data-d="1" aria-label="Mais">+</button></div></div>`}).join('');
+ $('lines').querySelectorAll('button').forEach(b=>b.onclick=()=>{cart[b.dataset.k]+=+b.dataset.d;if(cart[b.dataset.k]<1)delete cart[b.dataset.k];pill();if(!count())return close();render()});
+ $('sum').innerHTML=`<div><span>Pratos</span><span>${brl(total())}</span></div>${mode==='entrega'?'<div><span>Entrega</span><span>a combinar</span></div>':''}<div class="t"><span>Total</span><span>${brl(total())}</span></div>`;$('waT').textContent=brl(total());msg()}
+function msg(){let m='Olá, Peixe na Porta! Quero reservar:\n\n';Object.keys(cart).forEach(k=>{const it=item(k);m+=`• ${cart[k]}x ${it.label} — ${brl(it.price*cart[k])}\n`});
+ m+=`\n*Total: ${brl(total())}*${mode==='entrega'?' + entrega a combinar':''}\n${mode==='retirada'?'Retirada':'Entrega'} · ${$('when').value}\n`;
+ if($('nome').value)m+=`Nome: ${$('nome').value}\n`;if(mode==='entrega'&&$('end').value)m+=`Endereço: ${$('end').value}\n`;if($('obs').value)m+=`Obs.: ${$('obs').value}\n`;
+ $('wa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(m)}
+['nome','end','obs','when'].forEach(i=>$(i).addEventListener('input',msg));
+$('mode').querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$('mode').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));$('endWrap').hidden=mode!=='entrega';$('where').hidden=mode==='entrega';render()});
+function open(){render();['sheet','scrim','waBar'].forEach(i=>$(i).classList.add('on'));$('sheet').setAttribute('aria-hidden','false')}
+function close(){['sheet','scrim','waBar'].forEach(i=>$(i).classList.remove('on'));$('sheet').setAttribute('aria-hidden','true')}
+$('openCo').onclick=open;$('scrim').onclick=close;
+
+// horário Bahia
+(()=>{const n=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Bahia'})),h=n.getHours()+n.getMinutes()/60,o=h>=8&&h<18;
+ $('openTxt').textContent=o?'Aberto até 18h':'Abre às 8h';$('dot').classList.toggle('off',!o);
+ const op=[];const add=d=>{for(let t=8;t<18;t+=.5){if(d==='Hoje'&&t<h+1)continue;op.push(`<option>${d}, ${Math.floor(t)}h${t%1?'30':'00'}</option>`)}};if(o)add('Hoje');add('Amanhã');$('when').innerHTML=op.join('')})();
+
+// caustic ocean light
+(()=>{const c=$('sea'),x=c.getContext('2d');c.width=120;c.height=220;
+ const L=[[.2,.15,'#1673e6',.9],[.8,.3,'#3fb4ff',.7],[.5,.6,'#0a4fc4',.9],[.15,.85,'#2a9bff',.6],[.85,.8,'#1673e6',.7],[.5,.25,'#7fd2ff',.35]];
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function f(t){x.globalCompositeOperation='source-over';x.fillStyle='#020b1f';x.fillRect(0,0,120,220);x.globalCompositeOperation='lighter';
+  L.forEach((l,i)=>{const px=(l[0]+.12*Math.sin(t/3100+i*1.7))*120,py=(l[1]+.08*Math.cos(t/2700+i))*220,r=55+15*Math.sin(t/2000+i);
+   const g=x.createRadialGradient(px,py,0,px,py,r);g.addColorStop(0,l[2]);g.addColorStop(1,'transparent');x.globalAlpha=l[3]*.55;x.fillStyle=g;x.fillRect(0,0,120,220)});
+  x.globalAlpha=1;if(!reduce)requestAnimationFrame(f)}requestAnimationFrame(f)})();
+</script>
+
+</body>
+</html>
