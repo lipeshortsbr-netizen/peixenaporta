@@ -210,7 +210,7 @@ select.in option{color:#000}
   <button class="nextb glass" id="nextb" aria-label="Próximo prato">›</button></div>
   <div class="dots" id="dots"></div>
 
-  <p class="info"><b>Almoço toda sexta-feira, das 8h às 18h</b><br>Faça seu pedido durante a semana e receba ou retire na sexta<br>Retirada na casa da Viviane e do Ademir ou entrega com taxa combinada · Cruz das Almas e região</p>
+  <p class="info"><b>Almoço toda sexta-feira, das 11h às 14h</b><br>Faça seu pedido durante a semana e receba ou retire na sexta<br>Retirada na casa da Viviane e do Ademir ou entrega com taxa combinada · Cruz das Almas e região</p>
 </div>
 
 <div class="gal" id="gal" aria-hidden="true">
@@ -317,12 +317,12 @@ $('openCo').onclick=open;$('scrim').onclick=close;
 
 // horário Bahia
 (()=>{const n=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Bahia'})),h=n.getHours()+n.getMinutes()/60;
- const sexta=n.getDay()===5,hoje=sexta&&h<17;// pedido para hoje só até 17h
+ const sexta=n.getDay()===5,hoje=sexta&&h<13;// pedido para hoje só até 13h
  const dd=d=>String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');
  let ad=(5-n.getDay()+7)%7;if(ad===0&&!hoje)ad=7;
  const f1=new Date(n);f1.setDate(n.getDate()+ad);const f2=new Date(f1);f2.setDate(f1.getDate()+7);
  $('openTxt').textContent=hoje?'Hoje tem almoço':'Almoço sexta, '+dd(f1);$('dot').classList.toggle('off',!hoje);
- const op=[];const add=(d,isHoje)=>{const lbl=isHoje?'Hoje (sexta)':'Sexta, '+dd(d);for(let t=8;t<18;t+=.5){if(isHoje&&t<h+1)continue;op.push(`<option>${lbl}, ${Math.floor(t)}h${t%1?'30':'00'}</option>`)}};
+ const op=[];const add=(d,isHoje)=>{const lbl=isHoje?'Hoje (sexta)':'Sexta, '+dd(d);for(let t=11;t<=14;t+=.5){if(isHoje&&t<h+1)continue;op.push(`<option>${lbl}, ${Math.floor(t)}h${t%1?'30':'00'}</option>`)}};
  add(f1,hoje);add(f2,false);$('when').innerHTML=op.join('')})();
 
 // caustic ocean light
